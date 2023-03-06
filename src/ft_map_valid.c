@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 10:09:15 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/03/06 10:43:50 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:01:54 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	ft_valide_ext(char *map)
 	end = (ft_strlen(&map[0]) - 1);
 	if (map[end] != 'r' || map[end - 1] != 'e'
 		|| map[end - 2] != 'b' || map[end - 3] != '.')
-		ft_error("Error\nExtension map error, only .ber maps\n");
+		ft_error("Error\nExtension map error, only .ber maps");
 }
 
 char	**ft_map_read(char argv[1], int i)
@@ -32,7 +32,7 @@ char	**ft_map_read(char argv[1], int i)
 	ft_valide_ext(argv);
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
-		ft_error("Error\nMap can't be read\n");
+		ft_error("Error\nMap cannot be read or does not exist");
 	str = ft_read_line(fd);
 	if (!str)
 		return (NULL);
@@ -48,7 +48,7 @@ char	**ft_map_read(char argv[1], int i)
 	return (map);
 }
 
-void	ft_map_not_items(char **map, int i, t_data *data)
+void	ft_map_other_items(char **map, int i)
 {
 	int	j;
 
@@ -59,7 +59,7 @@ void	ft_map_not_items(char **map, int i, t_data *data)
 		{
 			if (map [i][j] != 'C' && map [i][j] != 'P' && map [i][j] != 'E'
 				&& map [i][j] != '1' && map [i][j] != '0')
-				ft_error("Error\nNot recognised symbol on your map\n");
+				ft_error("Error\nNot recognised symbol on your map");
 		}
 	}
 }
@@ -67,11 +67,10 @@ void	ft_map_not_items(char **map, int i, t_data *data)
 void	ft_map_items(char **map, int i, t_data *data)
 {
 	int	j;
-	int	player;
 
 	data->collectible = 0;
 	data->exit = 0;
-	player = 0;
+	data->player = 0;
 	while (map[++i])
 	{
 		j = -1;
@@ -85,15 +84,15 @@ void	ft_map_items(char **map, int i, t_data *data)
 			{
 				data->x = j;
 				data->y = i;
-				player++;
+				data->player++;
 			}
 		}
 	}
-	if (data->exit != 1 || player != 1 || data->collectible < 1)
-		ft_error("Error\nYou need 1player, 1 exit and less 1 collectible");
+	if (data->exit != 1 || data->player != 1 || data->collectible < 1)
+		ft_error("Error\nYou need 1 Player, 1 Exit and less 1 Collectible");
 }
 
-void	ft_map_ctrl(char **map, size_t len, t_data *data)
+void	ft_edge_ctrl(char **map, size_t len, t_data *data)
 {
 	int	i;
 	int	j;
@@ -102,18 +101,18 @@ void	ft_map_ctrl(char **map, size_t len, t_data *data)
 	while (map[++i])
 	{
 		if (map[i][0] != '1' || map[i][len] != '1')
-			ft_error("Error\nMap not closed column\n");
+			ft_error("Error\nMap not closed column");
 	}
 	data->height = i;
-	if (i > 20)
+	if (i > 43)
 		ft_error("Error\nMap too high");
 	j = -1;
 	while (map[0][++j])
 		if (map[0][j] != '1')
-			ft_error("Error\nMap not closed line up\n");
+			ft_error("Error\nMap not closed line up");
 	data->width = j;
 	j = -1;
 	while (map[i - 1][++j])
 		if (map[i - 1][j] != '1')
-			ft_error("Error\nMap not closed line down\n");
+			ft_error("Error\nMap not closed line down");
 }

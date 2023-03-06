@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 13:35:39 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/03/03 09:33:39 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/03/06 13:27:04 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_map_draw(char **map, t_data *data)
 {
-	char	*str;
+	char	*moves;
 	int		i;
 	int		j;
 
@@ -34,9 +34,9 @@ void	ft_map_draw(char **map, t_data *data)
 		}
 		i++;
 	}
-	str = ft_itoa(data->moves);
-	mlx_string_put(data->mlx, data->win, 5, 5, 0x0000FF00, str);
-	free(str);
+	moves = ft_itoa(data->moves);
+	mlx_string_put(data->mlx, data->win, 5, 5, 0x0000FF00, moves);
+	free(moves);
 }
 
 char	*ft_path_xpm(char map, t_data *data)

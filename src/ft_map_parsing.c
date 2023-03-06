@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:34:36 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/03/02 14:22:18 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/03/06 14:12:17 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	ft_floodfill(char **map, int x, int y, t_data *data)
 	ft_floodfill(map, x, y + 1, data);
 }
 
-void	ft_map_valid(char **map, t_data *data)
+void	ft_path_valid(char **map, t_data *data)
 {
 	t_data	*backupdata;
 
@@ -42,7 +42,7 @@ void	ft_map_valid(char **map, t_data *data)
 	if (backupdata->collectible != data->collectible || backupdata->exit != 1)
 	{
 		free(backupdata);
-		ft_error("Error\nMap error, no path finded\n");
+		ft_error("Error\nMap error, no path finded");
 	}
 	free(backupdata);
 }

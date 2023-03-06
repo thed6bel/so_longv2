@@ -6,7 +6,7 @@
 /*   By: hucorrei <hucorrei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 13:52:27 by hucorrei          #+#    #+#             */
-/*   Updated: 2023/03/06 10:29:17 by hucorrei         ###   ########.fr       */
+/*   Updated: 2023/03/06 14:38:31 by hucorrei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 # include <mlx.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <stdio.h>
-#include <unistd.h>
-
 
 typedef struct s_data
 {
@@ -54,10 +51,9 @@ char	*ft_path_xpm(char map, t_data *data);
 char	**ft_map_read(char argv[1], int i);
 size_t	ft_map_len(char **map);
 void	ft_map_items(char **map, int i, t_data *data);
-void	ft_map_not_items(char **map, int i, t_data *data);
-void	ft_map_ctrl(char **map, size_t len, t_data *data);
-void	ft_map_valid(char **map, t_data *data);
+void	ft_map_other_items(char **map, int i);
+void	ft_edge_ctrl(char **map, size_t len, t_data *data);
+void	ft_path_valid(char **map, t_data *data);
 char	*ft_read_line(int fd);
-
 
 #endif
